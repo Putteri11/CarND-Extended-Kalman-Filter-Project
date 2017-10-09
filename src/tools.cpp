@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tools.h"
+#include <math.h>
 
 using Eigen::VectorXd;
 using Eigen::MatrixXd;
@@ -36,7 +37,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
   return rmse;
 }
 
-MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
+MatrixXd Tools::CalculateJacobian(const VectorXd& x_state, const MatrixXd &Hj_) {
   
   MatrixXd Hj(3,4);
   //recover state parameters
@@ -44,22 +45,25 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   float py = x_state(1);
   float vx = x_state(2);
   float vy = x_state(3); 
+  
+  double c = px*px + py*py;
+  double c2 = sqrt(c);
+  float zero_div_th = 0.1;
 
   //check division by zero
-  if (px == 0 && py == 0) {
-    cout << "CalculateJacobian() - Error - Division by Zero" << endl;
-    return Hj;
+  if (c < zero_div_th) {
+    return Hj_;
   };
 
   //compute the Jacobian matrix
-  Hj(0, 0) = px / pow(px*px+py*py, 0.5);
-  Hj(0, 1) = py / pow(px*px+py*py, 0.5);
-  Hj(1, 0) = -py / (px*px+py*py);
-  Hj(1, 1) = px / (px*px+py*py);
-  Hj(2, 0) = py * (vx*py - vy*px) / pow(px*px+py*py, 1.5);
-  Hj(2, 1) = px * (vy*px - vx*py) / pow(px*px+py*py, 1.5);
-  Hj(2, 2) = px / pow(px*px+py*py, 0.5);
-  Hj(2, 3) = py / pow(px*px+py*py, 0.5);
+  Hj(0, 0) = px / c2;
+  Hj(0, 1) = py / c2;
+  Hj(1, 0) = -py / c;
+  Hj(1, 1) = px / c;
+  Hj(2, 0) = py * (vx*py - vy*px) / pow(c, 1.5);
+  Hj(2, 1) = px * (vy*px - vx*py) / pow(c, 1.5);
+  Hj(2, 2) = px / c2;
+  Hj(2, 3) = py / c2;
 
   return Hj;
 

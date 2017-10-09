@@ -1025,6 +1025,8 @@ Eigen/Dense
 /mnt/c/Users/Joona/Documents/GitHub/CarND-Extended-Kalman-Filter-Project/src/Eigen/Dense
 iostream
 -
+math.h
+-
 
 /mnt/c/Users/Joona/Documents/GitHub/CarND-Extended-Kalman-Filter-Project/src/FusionEKF.h
 measurement_package.h
@@ -1101,6 +1103,10 @@ vector
 /mnt/c/Users/Joona/Documents/GitHub/CarND-Extended-Kalman-Filter-Project/src/kalman_filter.cpp
 kalman_filter.h
 /mnt/c/Users/Joona/Documents/GitHub/CarND-Extended-Kalman-Filter-Project/src/kalman_filter.h
+tools.h
+/mnt/c/Users/Joona/Documents/GitHub/CarND-Extended-Kalman-Filter-Project/src/tools.h
+math.h
+-
 
 /mnt/c/Users/Joona/Documents/GitHub/CarND-Extended-Kalman-Filter-Project/src/kalman_filter.h
 Eigen/Dense
@@ -1108,7 +1114,7 @@ Eigen/Dense
 
 /mnt/c/Users/Joona/Documents/GitHub/CarND-Extended-Kalman-Filter-Project/src/main.cpp
 uWS/uWS.h
-/mnt/c/Users/Joona/Documents/GitHub/CarND-Extended-Kalman-Filter-Project/src/uWS/uWS.h
+-
 iostream
 -
 json.hpp
