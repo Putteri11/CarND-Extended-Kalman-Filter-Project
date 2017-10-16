@@ -76,6 +76,16 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
   long x_size = x_.size();
   MatrixXd I = MatrixXd::Identity(x_size, x_size);
+  
+  if (K(0) != K(0)) {
+    std::cout << "R = " << R_ << std::endl;
+    std::cout << "H = " << H_ << std::endl;
+    std::cout << "S = " << S << std::endl;
+    std::cout << "Si = " << Si << std::endl;
+    std::cout << "Ht = " << Ht << std::endl;
+    std::cout << "P = " << P_ << std::endl;
+    std::cout << "K = " << K << std::endl;
+  }
 
   x_ = x_ + (K * y);
   P_ = (I - K * H_) * P_;
